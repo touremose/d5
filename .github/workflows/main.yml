@@ -1,0 +1,32 @@
+name: Test Two Stages Approval
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  stage_1:
+    name: Stage 1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Stage 1
+        run: |
+          echo "Stage 1 started"
+          sleep 10
+          echo "Stage 1 completed"
+
+  stage_2:
+    name: Stage 2
+    needs: stage_1
+    environment:
+      name: test-approval
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Stage 2
+        run: |
+          echo "Stage 2 started"
+          sleep 10
+          echo "Stage 2 completed"
